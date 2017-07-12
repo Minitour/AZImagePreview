@@ -4,7 +4,18 @@ iOS Framework that makes it easy to preview images on any UIImageView.
 ## Screenshots
 <img src="Screenshots/sc1.gif" width="280" /> <img src="Screenshots/sc2.gif" width="280" /> 
 
-## Usage:
+
+## Installation:
+
+### Cocoa Pods:
+
+```bash
+pod 'AZImagePreview'
+```
+
+### Manual:
+
+Simply drag and drop the ```Sources``` folder to your project.
 
 
 ### Conform to the AZPreviewImageViewDelegate protocol:

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "AZImagePreview"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "iOS Framework that makes it easy to preview images on any UIImageView."
   s.homepage     = "https://github.com/Minitour/AZImagePreview"
   s.license      = "MIT"
