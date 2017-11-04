@@ -261,7 +261,7 @@ public class AZImagePresenterViewController: UIViewController{
     
     // MARK: - Gesture Handler
     
-    internal func handlePanGesture(_ sender: UIPanGestureRecognizer){
+    @objc internal func handlePanGesture(_ sender: UIPanGestureRecognizer){
         
         let animationDuration = self.animationDuration
         
@@ -357,7 +357,7 @@ public class AZImagePresenterViewController: UIViewController{
         }
     }
     
-    internal func done(_ sender: UIBarButtonItem){
+    @objc internal func done(_ sender: UIBarButtonItem){
         if let imageView = imageView, !isDragging{
             var safePoint = imageView.center
             safePoint.y = view.frame.maxY + imageView.bounds.midY
@@ -365,7 +365,7 @@ public class AZImagePresenterViewController: UIViewController{
         }
     }
     
-    internal func didSelectToolBarItem(sender: UIBarButtonItem){
+    @objc internal func didSelectToolBarItem(sender: UIBarButtonItem){
         actions[sender.tag]?.handler(self,originalImage ?? imageView!)
     }
     
