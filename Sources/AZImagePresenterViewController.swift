@@ -86,7 +86,7 @@ public class AZImagePresenterViewController: UIViewController{
         return nil
     }
     
-    fileprivate var originalContentMode: UIViewContentMode = .scaleAspectFit
+    fileprivate var originalContentMode: UIView.ContentMode = .scaleAspectFit
     
     fileprivate var actions: [AZPresenterAction?] = []
     
@@ -552,7 +552,7 @@ fileprivate final class ObjectAssociation<T: Any> {
 }
 
 fileprivate class FixedNavigationController: UINavigationController{
-    override var childViewControllerForStatusBarStyle: UIViewController?{
+    override var childForStatusBarStyle: UIViewController?{
         return viewControllers.first
     }
 }
@@ -562,7 +562,7 @@ fileprivate extension UIView
     func addCornerRadiusAnimation(from: CGFloat, to: CGFloat, duration: CFTimeInterval)
     {
         let animation = CABasicAnimation(keyPath:"cornerRadius")
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         animation.fromValue = from
         animation.toValue = to
         animation.duration = duration
