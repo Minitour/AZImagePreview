@@ -16,14 +16,6 @@ public struct AZPresenterAction{
     public var handler: AZPresenterHandler
 }
 
-// MARK: - AZGestureDirection
-
-public enum AZGestureDirection{
-    case yAxis
-    case xAxis
-    case both
-}
-
 // MARK: - AZPreviewDismissDirection
 
 public enum AZPreviewDismissDirection{
@@ -57,6 +49,8 @@ public class AZImagePresenterViewController: UIViewController{
         navigationController.navigationBar.tintColor = tintColor
         return navigationController
     }
+
+    fileprivate var scrollView: PannableScrollView!
     
     
     // MARK: - private property
@@ -85,6 +79,10 @@ public class AZImagePresenterViewController: UIViewController{
         }
         return nil
     }
+
+    fileprivate var isZoomedIn: Bool {
+        return self.scrollView.zoomScale > self.scrollView.minimumZoomScale
+    }
     
     fileprivate var originalContentMode: UIView.ContentMode = .scaleAspectFit
     
@@ -92,9 +90,6 @@ public class AZImagePresenterViewController: UIViewController{
     
     /// The direction in which the image can be dismissed uppong drag
     public var dismissDirection: AZPreviewDismissDirection = .both
-    
-    /// The gesture direction
-    public var gestureDirection: AZGestureDirection = .both
     
     // The background color
     public var backgroundColor: UIColor = .white
@@ -154,13 +149,26 @@ public class AZImagePresenterViewController: UIViewController{
     
     override public func loadView() {
         super.loadView()
+        scrollView = PannableScrollView()
         imageView = TrackableImage()
+        view.addSubview(scrollView)
+
         view.addSubview(imageView!)
+        scrollView.delegate = self
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.maximumZoomScale = 4.0
+
+
     }
     
     fileprivate var isNavigationBarHidden = false
     
     fileprivate var isToolBarHidden = false
+    
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -168,12 +176,13 @@ public class AZImagePresenterViewController: UIViewController{
         isToolBarHidden = navigationController?.isToolbarHidden ?? false
         navigationController?.isNavigationBarHidden = true
         navigationController?.isToolbarHidden = true
-        
- 
+
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        doubleTapGesture.numberOfTapsRequired = 2
+        imageView?.addGestureRecognizer(doubleTapGesture)
         imageView?.image = originalImage?.image
         imageView?.contentMode = .scaleAspectFit
         imageView?.isUserInteractionEnabled = true
-        imageView?.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:))))
     }
     
     public func addAction(_ action: AZPresenterAction){
@@ -255,107 +264,22 @@ public class AZImagePresenterViewController: UIViewController{
     }
     
     fileprivate func prepareForDismiss(){
-        originalImage?.isHidden = false
+        originalImage?.alpha = 1.0
         dismiss(animated: false, completion: nil)
     }
-    
-    // MARK: - Gesture Handler
-    
-    @objc internal func handlePanGesture(_ sender: UIPanGestureRecognizer){
-        
-        let animationDuration = self.animationDuration
-        
-        let baseView = imageView!
-        let translation = sender.translation(in: self.view)
-        
-        let allowX: Bool = gestureDirection == .both || gestureDirection == .xAxis
-        let allowY: Bool = gestureDirection == .both || gestureDirection == .yAxis
-        
-        baseView.center = CGPoint(x: baseView.lastLocation.x + (translation.x * (allowX ? 1.0 : 0.0)),
-                                  y: baseView.lastLocation.y + (translation.y * (allowY ? 1.0 : 0.0)))
-        
-        func distance(_ a: CGPoint, _ b: CGPoint) -> CGFloat {
-            let xDist = a.x - b.x
-            let yDist = a.y - b.y
-            return CGFloat(sqrt((xDist * xDist) + (yDist * yDist)))
-        }
-        
-        let alpha = 1.0 - max(min(distance(baseView.center, view.center)/distance(view.frame.origin, view.center), 1.0),0)
-        
-        let scale: CGFloat = scaleOnDrag ? max(min(minimumScale > 0.0 ? (minimumScale < alpha ? alpha : minimumScale) : alpha,1.0),self.scale) : 1.0
-        
-        imageView?.transform = CGAffineTransform(scaleX: scale, y: scale)
-        self.view.backgroundColor = self.backgroundColor.withAlphaComponent(alpha)
-        
-        let returnToCenter:(CGPoint,Bool)->Void = { (finalPoint,animate) in
-            
-            self.hideBars(hide: false)
-            
-            if !animate {
-                baseView.center = finalPoint
-                self.view.backgroundColor = self.backgroundColor.withAlphaComponent(1.0)
-                self.imageView?.transform = .identity
-                return
+
+    @objc internal func handleTap(_ sender: UITapGestureRecognizer) {
+        UIView.animate(withDuration: animationDuration) {
+            if self.isZoomedIn {
+                // zoom out
+                self.scrollView.zoomScale = self.scrollView.minimumZoomScale
+            }else {
+                // zoom in
+                self.scrollView.zoomScale = ( min(self.scrollView.minimumZoomScale * 4.0,self.scrollView.maximumZoomScale / 2.0) )
             }
-            UIView.animate(withDuration: animationDuration, animations: { () -> Void in
-                baseView.center = finalPoint
-                self.view.backgroundColor = self.backgroundColor.withAlphaComponent(1.0)
-                self.imageView?.transform = .identity
-            }, completion: { (complete) -> Void in
-            })
-        }
-        
-        
-        let dismissInDirection: (CGPoint)->Void = { [weak self] (point) in
-            
-            
-            self?.dismissDirection(baseView,scale: scale,finalPoint: point)
-        }
-        
-        var finalPoint = (baseView.superview?.center)!
-        
-        hideBars(hide: true)
-        
-        isDragging = true
-        
-        if sender.state == .ended{
-            isDragging = false
-            let velocity = sender.velocity(in: view)
-            let mag = sqrtf(Float(velocity.x * velocity.x) + Float(velocity.y * velocity.y))
-            let slideMult = mag / 200
-            let dismissWithGesture = dismissDirection != .none ? true : false
-            
-            if dismissWithGesture && slideMult > 1 {
-                //dismiss
-                if velocity.y > 0{
-                    //dismiss downward
-                    if dismissDirection == .bottom || dismissDirection == .both {
-                        finalPoint.y = (baseView.superview?.frame.maxY)! + (baseView.bounds.midY)
-                        dismissInDirection(finalPoint)
-                    }else{
-                        returnToCenter(finalPoint,true)
-                    }
-                }else{
-                    
-                    //dismiss upward
-                    if dismissDirection == .top || dismissDirection == .both {
-                        finalPoint.y = -(baseView.bounds.midY)
-                        dismissInDirection(finalPoint)
-                    }else{
-                        returnToCenter(finalPoint,true)
-                    }
-                }
-            }else{
-                //return to center
-                returnToCenter(finalPoint,true)
-            }
-        }
-        
-        if sender.state == .cancelled || sender.state == .failed{
-            returnToCenter(finalPoint,false)
-            isDragging = false
         }
     }
+
     
     @objc internal func done(_ sender: UIBarButtonItem){
         if let imageView = imageView, !isDragging{
@@ -407,7 +331,7 @@ public class AZImagePresenterViewController: UIViewController{
         imageView?.contentMode = originalContentMode
         
         //hide make original image hidden
-        originalImage?.isHidden = true
+        originalImage?.alpha = 0.0
         
         //animate to center
         view.backgroundColor = .clear
@@ -444,7 +368,10 @@ public class AZImagePresenterViewController: UIViewController{
         }){ (bool) in
             self.imageView?.contentMode = .scaleAspectFit
             self.imageView?.frame = self.view.frame
-            self.imageView?.autoresizingMask = [.flexibleWidth,.flexibleHeight]
+            //self.imageView?.autoresizingMask = [.flexibleWidth,.flexibleHeight]
+            self.scrollView.view = self.imageView
+            self.scrollView.setZoomScale()
+
         }
     }
     
@@ -528,6 +455,51 @@ public class AZImagePresenterViewController: UIViewController{
         }
     }
     
+}
+
+extension AZImagePresenterViewController: UIScrollViewDelegate {
+
+    public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.scrollView.view
+    }
+
+    public func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        if let view = self.scrollView.view {
+            let viewSize = view.frame.size
+            let scrollViewSize = scrollView.bounds.size
+            let verticalInset = viewSize.height < scrollViewSize.height ? (scrollViewSize.height - viewSize.height) / 2 : 0
+            let horizontalInset = viewSize.width < scrollViewSize.width ? (scrollViewSize.width - viewSize.width) / 2 : 0
+            scrollView.contentInset = UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
+        }
+    }
+
+    public func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+
+        if isZoomedIn {
+            return
+        }
+
+        let xV = velocity.x
+        let yV = velocity.y
+
+        if yV > 0 {
+            if dismissDirection == .bottom || dismissDirection == .none {
+                return
+            }
+        }else {
+            if dismissDirection == .top || dismissDirection == .none {
+                return
+            }
+        }
+
+        if max(abs(xV),abs(yV)) > 1.0 {
+            self.view.addSubview(self.imageView!)
+            self.imageView?.contentMode = .scaleAspectFit
+            self.imageView?.frame = self.view.frame
+            self.imageView?.autoresizingMask = [.flexibleWidth,.flexibleHeight]
+            dismissDirection(self.imageView!, scale: 1.0, finalPoint: (self.imageView!.superview?.center)!)
+        }
+    }
 }
 
 // MARK: - Private class helper, used to add stored extension properties.

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D1FDA4C21712717001160F8 /* PannableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1FDA4B21712717001160F8 /* PannableScrollView.swift */; };
 		9D2663EA1F15693400EB5B0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2663E91F15693400EB5B0E /* AppDelegate.swift */; };
 		9D2663EC1F15693400EB5B0E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2663EB1F15693400EB5B0E /* ViewController.swift */; };
 		9D2663EF1F15693400EB5B0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D2663ED1F15693400EB5B0E /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9D1FDA4B21712717001160F8 /* PannableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PannableScrollView.swift; sourceTree = "<group>"; };
 		9D2663E61F15693400EB5B0E /* AZImagePreviewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AZImagePreviewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D2663E91F15693400EB5B0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D2663EB1F15693400EB5B0E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			children = (
 				9D2663FC1F1569B800EB5B0E /* AZImagePresenterViewController.swift */,
 				9D2663FE1F1569D900EB5B0E /* AZPreviewImageViewDelegate.swift */,
+				9D1FDA4B21712717001160F8 /* PannableScrollView.swift */,
 			);
 			name = Sources;
 			path = ../Sources;
@@ -167,6 +170,7 @@
 				9D2663EC1F15693400EB5B0E /* ViewController.swift in Sources */,
 				9D2663FF1F1569D900EB5B0E /* AZPreviewImageViewDelegate.swift in Sources */,
 				9D2664051F1572F400EB5B0E /* TableViewController.swift in Sources */,
+				9D1FDA4C21712717001160F8 /* PannableScrollView.swift in Sources */,
 				9D2663EA1F15693400EB5B0E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
