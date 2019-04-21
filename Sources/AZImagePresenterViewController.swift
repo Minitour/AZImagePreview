@@ -27,9 +27,9 @@ public enum AZPreviewDismissDirection{
 
 // MARK: - AZImagePresenterViewController
 
-public class AZImagePresenterViewController: UIViewController{
+open class AZImagePresenterViewController: UIViewController{
     
-    public class func embedInNavigation(_ controller: AZImagePresenterViewController)->UINavigationController{
+    open class func embedInNavigation(_ controller: AZImagePresenterViewController)->UINavigationController{
         let navigationController = FixedNavigationController(rootViewController: controller)
         navigationController.modalPresentationStyle = .overFullScreen
         navigationController.modalTransitionStyle = .crossDissolve
@@ -43,7 +43,7 @@ public class AZImagePresenterViewController: UIViewController{
         return navigationController
     }
     
-    public func embedInNavigation()->UINavigationController{
+    open func embedInNavigation()->UINavigationController{
         let navigationController = AZImagePresenterViewController.embedInNavigation(self)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(done(_:)))
         navigationController.navigationBar.tintColor = tintColor
@@ -56,10 +56,10 @@ public class AZImagePresenterViewController: UIViewController{
     // MARK: - private property
     
     /// Reference to the original image view
-    fileprivate var originalImage: UIImageView?
+    open var originalImage: UIImageView?
     
     /// The delegate that was set on the image
-    fileprivate weak var delegate: AZPreviewImageViewDelegate?
+    open weak var delegate: AZPreviewImageViewDelegate?
     
     /// The image that we drag around
     fileprivate var imageView: TrackableImage?
@@ -89,20 +89,20 @@ public class AZImagePresenterViewController: UIViewController{
     fileprivate var actions: [AZPresenterAction?] = []
     
     /// The direction in which the image can be dismissed uppong drag
-    public var dismissDirection: AZPreviewDismissDirection = .both
+    open var dismissDirection: AZPreviewDismissDirection = .both
     
     // The background color
-    public var backgroundColor: UIColor = .white
+    open var backgroundColor: UIColor = .white
     
     // The animation duration
-    public var animationDuration: TimeInterval = 0.2
+    open var animationDuration: TimeInterval = 0.2
     
-    public var scaleOnDrag: Bool = true
+    open var scaleOnDrag: Bool = true
     
     /// 0 or lower means scale to original size.
-    public var minimumScale: CGFloat = 0.0
+    open var minimumScale: CGFloat = 0.0
     
-    public var tintColor: UIColor = .black {
+    open var tintColor: UIColor = .black {
         didSet{
             navigationController?.navigationBar.tintColor = tintColor
             navigationController?.toolbar.tintColor = tintColor
@@ -110,14 +110,14 @@ public class AZImagePresenterViewController: UIViewController{
     }
     
     /// hide/show status bar
-    public var isStatusBarHidden = false{
+    open var isStatusBarHidden = false{
         didSet{
             setNeedsStatusBarAppearanceUpdate()
         }
     }
     
     /// change status bar style
-    public var statusBarStyle: UIStatusBarStyle = .default{
+    open var statusBarStyle: UIStatusBarStyle = .default{
         didSet{
             setNeedsStatusBarAppearanceUpdate()
         }
@@ -126,15 +126,15 @@ public class AZImagePresenterViewController: UIViewController{
     
     // MARK: - UIViewController
     
-    override public var preferredStatusBarUpdateAnimation: UIStatusBarAnimation{
+    override open var preferredStatusBarUpdateAnimation: UIStatusBarAnimation{
         return .fade
     }
     
-    override public var prefersStatusBarHidden: Bool{
+    override open var prefersStatusBarHidden: Bool{
         return isStatusBarHidden
     }
     
-    override public var preferredStatusBarStyle: UIStatusBarStyle{
+    override open var preferredStatusBarStyle: UIStatusBarStyle{
         return statusBarStyle
     }
     
@@ -147,7 +147,7 @@ public class AZImagePresenterViewController: UIViewController{
         fatalError("init(coder:) has not been implemented")
     }
     
-    override public func loadView() {
+    override open func loadView() {
         super.loadView()
         scrollView = PannableScrollView()
         imageView = TrackableImage()
@@ -170,7 +170,7 @@ public class AZImagePresenterViewController: UIViewController{
     fileprivate var isToolBarHidden = false
     
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         isNavigationBarHidden = navigationController?.isNavigationBarHidden ?? false
         isToolBarHidden = navigationController?.isToolbarHidden ?? false
@@ -185,13 +185,13 @@ public class AZImagePresenterViewController: UIViewController{
         imageView?.isUserInteractionEnabled = true
     }
     
-    public func addAction(_ action: AZPresenterAction){
+    open func addAction(_ action: AZPresenterAction){
         actions.append(action)
         
         setupActions()
     }
     
-    public func removeAction(at index: Int){
+    open func removeAction(at index: Int){
         if index >= actions.count{ return }
         
         actions.remove(at: index)
@@ -231,7 +231,7 @@ public class AZImagePresenterViewController: UIViewController{
     
     
     
-    override public func viewDidAppear(_ animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         presentView()
         setupActions()
