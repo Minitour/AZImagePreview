@@ -560,7 +560,7 @@ fileprivate extension CGSize{
 
 public extension UIImageView{
     
-    private static let association = ObjectAssociation<AZPreviewImageViewDelegate>()
+    private static let association = ObjectAssociation<AZPreviewImageViewDelegate>(policy: .OBJC_ASSOCIATION_ASSIGN)
     
     public var delegate: AZPreviewImageViewDelegate? {
         
