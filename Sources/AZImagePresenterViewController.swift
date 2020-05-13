@@ -45,7 +45,7 @@ open class AZImagePresenterViewController: UIViewController{
     
     open func embedInNavigation()->UINavigationController{
         let navigationController = AZImagePresenterViewController.embedInNavigation(self)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(done(_:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(done(_:)))
         navigationController.navigationBar.tintColor = tintColor
         return navigationController
     }
@@ -117,7 +117,7 @@ open class AZImagePresenterViewController: UIViewController{
     }
     
     /// change status bar style
-    open var statusBarStyle: UIStatusBarStyle = .default{
+    open var statusBarStyle: UIStatusBarStyle = .lightContent{
         didSet{
             setNeedsStatusBarAppearanceUpdate()
         }
@@ -283,9 +283,11 @@ open class AZImagePresenterViewController: UIViewController{
     
     @objc internal func done(_ sender: UIBarButtonItem){
         if let imageView = imageView, !isDragging{
-            var safePoint = imageView.center
-            safePoint.y = view.frame.maxY + imageView.bounds.midY
-            dismissDirection(imageView,scale: 1.0,finalPoint: safePoint)
+            self.view.addSubview(self.imageView!)
+            self.imageView?.contentMode = .scaleAspectFit
+            self.imageView?.frame = self.view.frame
+            self.imageView?.autoresizingMask = [.flexibleWidth,.flexibleHeight]
+            dismissDirection(self.imageView!, scale: 1.0, finalPoint: (self.imageView!.superview?.center)!)
         }
     }
     
@@ -328,7 +330,7 @@ open class AZImagePresenterViewController: UIViewController{
             originalContentMode = .scaleAspectFit
         }
         
-        imageView?.contentMode = originalContentMode
+        imageView?.contentMode = .scaleAspectFit
         
         //hide make original image hidden
         originalImage?.alpha = 0.0
@@ -410,7 +412,7 @@ open class AZImagePresenterViewController: UIViewController{
         
         //update the image
         baseView.frame.size.height = sHeight
-        baseView.frame.size.height = sWidth
+        baseView.frame.size.width = sWidth
         baseView.center = newCenter
         baseView.transform = CGAffineTransform(scaleX: scale, y: scale)
         
