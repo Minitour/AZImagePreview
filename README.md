@@ -13,6 +13,23 @@ iOS Framework that makes it easy to preview images on any UIImageView.
 pod 'AZImagePreview'
 ```
 
+### Swift Package Manager
+
+You can use [The Swift Package Manager](https://swift.org/package-manager) to install `AZImagePreview` by adding the proper description to your `Package.swift` file:
+
+```swift
+// swift-tools-version:4.0
+import PackageDescription
+
+let package = Package(
+name: "YOUR_PROJECT_NAME",
+dependencies: [
+.package(url: "https://github.com/Minitour/AZImagePreview.git", from: "1.2.0"),
+]
+)
+```
+Then run `swift build` whenever you get prepared.
+
 ### Manual:
 
 Simply drag and drop the ```Sources``` folder to your project.
