@@ -111,6 +111,7 @@
 					9D2663E51F15693400EB5B0E = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 35DWKWL79J;
+						LastSwiftMigration = 1200;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -126,7 +127,7 @@
 			);
 			mainGroup = 9D2663DD1F15693400EB5B0E;
 			packageReferences = (
-				CF778DA12538335400D71C25 /* XCRemoteSwiftPackageReference "AZImagePreview" */,
+				CF778DA12538335400D71C25 /* XCRemoteSwiftPackageReference "." */,
 			);
 			productRefGroup = 9D2663E71F15693400EB5B0E /* Products */;
 			projectDirPath = "";
@@ -295,7 +296,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.crofis.AZImagePreviewExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -311,7 +312,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.crofis.AZImagePreviewExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -339,9 +340,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CF778DA12538335400D71C25 /* XCRemoteSwiftPackageReference "AZImagePreview" */ = {
+		CF778DA12538335400D71C25 /* XCRemoteSwiftPackageReference "." */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "../";
+			repositoryURL = ../;
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.2.0;
@@ -352,7 +353,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		CF778DA22538335400D71C25 /* AZImagePreview */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CF778DA12538335400D71C25 /* XCRemoteSwiftPackageReference "AZImagePreview" */;
+			package = CF778DA12538335400D71C25 /* XCRemoteSwiftPackageReference "." */;
 			productName = AZImagePreview;
 		};
 /* End XCSwiftPackageProductDependency section */
