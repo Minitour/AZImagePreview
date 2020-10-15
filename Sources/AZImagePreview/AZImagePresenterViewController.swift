@@ -14,6 +14,11 @@ public typealias AZPresenterHandler = (AZImagePresenterViewController,UIImageVie
 public struct AZPresenterAction{
     public var icon: UIImage
     public var handler: AZPresenterHandler
+
+    public init(icon: UIImage, handler: @escaping AZPresenterHandler) {
+        self.icon = icon
+        self.handler = handler
+    }
 }
 
 // MARK: - AZPreviewDismissDirection

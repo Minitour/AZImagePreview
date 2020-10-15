@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AZImagePreview
 
 class TableViewController: UITableViewController{
     
