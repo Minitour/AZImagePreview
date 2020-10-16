@@ -3,25 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9D1FDA4C21712717001160F8 /* PannableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1FDA4B21712717001160F8 /* PannableScrollView.swift */; };
 		9D2663EA1F15693400EB5B0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2663E91F15693400EB5B0E /* AppDelegate.swift */; };
 		9D2663EC1F15693400EB5B0E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2663EB1F15693400EB5B0E /* ViewController.swift */; };
 		9D2663EF1F15693400EB5B0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D2663ED1F15693400EB5B0E /* Main.storyboard */; };
 		9D2663F11F15693400EB5B0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D2663F01F15693400EB5B0E /* Assets.xcassets */; };
 		9D2663F41F15693400EB5B0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D2663F21F15693400EB5B0E /* LaunchScreen.storyboard */; };
-		9D2663FD1F1569B800EB5B0E /* AZImagePresenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2663FC1F1569B800EB5B0E /* AZImagePresenterViewController.swift */; };
-		9D2663FF1F1569D900EB5B0E /* AZPreviewImageViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2663FE1F1569D900EB5B0E /* AZPreviewImageViewDelegate.swift */; };
 		9D2664051F1572F400EB5B0E /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2664041F1572F400EB5B0E /* TableViewController.swift */; };
 		9D2664071F1577CE00EB5B0E /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2664061F1577CE00EB5B0E /* CollectionViewController.swift */; };
 		9D2664091F157B8C00EB5B0E /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2664081F157B8C00EB5B0E /* CircleImageView.swift */; };
+		CF778DA32538335400D71C25 /* AZImagePreview in Frameworks */ = {isa = PBXBuildFile; productRef = CF778DA22538335400D71C25 /* AZImagePreview */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9D1FDA4B21712717001160F8 /* PannableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PannableScrollView.swift; sourceTree = "<group>"; };
 		9D2663E61F15693400EB5B0E /* AZImagePreviewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AZImagePreviewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D2663E91F15693400EB5B0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D2663EB1F15693400EB5B0E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,8 +26,6 @@
 		9D2663F01F15693400EB5B0E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D2663F31F15693400EB5B0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9D2663F51F15693400EB5B0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9D2663FC1F1569B800EB5B0E /* AZImagePresenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AZImagePresenterViewController.swift; sourceTree = "<group>"; };
-		9D2663FE1F1569D900EB5B0E /* AZPreviewImageViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AZPreviewImageViewDelegate.swift; sourceTree = "<group>"; };
 		9D2664041F1572F400EB5B0E /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		9D2664061F1577CE00EB5B0E /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		9D2664081F157B8C00EB5B0E /* CircleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
@@ -41,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF778DA32538335400D71C25 /* AZImagePreview in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,7 +46,6 @@
 		9D2663DD1F15693400EB5B0E = {
 			isa = PBXGroup;
 			children = (
-				9D2663FB1F1569B800EB5B0E /* Sources */,
 				9D2663E81F15693400EB5B0E /* AZImagePreviewExample */,
 				9D2663E71F15693400EB5B0E /* Products */,
 			);
@@ -80,17 +75,6 @@
 			path = AZImagePreviewExample;
 			sourceTree = "<group>";
 		};
-		9D2663FB1F1569B800EB5B0E /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				9D2663FC1F1569B800EB5B0E /* AZImagePresenterViewController.swift */,
-				9D2663FE1F1569D900EB5B0E /* AZPreviewImageViewDelegate.swift */,
-				9D1FDA4B21712717001160F8 /* PannableScrollView.swift */,
-			);
-			name = Sources;
-			path = ../Sources;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -107,6 +91,9 @@
 			dependencies = (
 			);
 			name = AZImagePreviewExample;
+			packageProductDependencies = (
+				CF778DA22538335400D71C25 /* AZImagePreview */,
+			);
 			productName = AZImagePreviewExample;
 			productReference = 9D2663E61F15693400EB5B0E /* AZImagePreviewExample.app */;
 			productType = "com.apple.product-type.application";
@@ -124,6 +111,7 @@
 					9D2663E51F15693400EB5B0E = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 35DWKWL79J;
+						LastSwiftMigration = 1200;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -138,6 +126,9 @@
 				Base,
 			);
 			mainGroup = 9D2663DD1F15693400EB5B0E;
+			packageReferences = (
+				CF778DA12538335400D71C25 /* XCRemoteSwiftPackageReference "." */,
+			);
 			productRefGroup = 9D2663E71F15693400EB5B0E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -166,12 +157,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D2664071F1577CE00EB5B0E /* CollectionViewController.swift in Sources */,
-				9D2663FD1F1569B800EB5B0E /* AZImagePresenterViewController.swift in Sources */,
 				9D2664091F157B8C00EB5B0E /* CircleImageView.swift in Sources */,
 				9D2663EC1F15693400EB5B0E /* ViewController.swift in Sources */,
-				9D2663FF1F1569D900EB5B0E /* AZPreviewImageViewDelegate.swift in Sources */,
 				9D2664051F1572F400EB5B0E /* TableViewController.swift in Sources */,
-				9D1FDA4C21712717001160F8 /* PannableScrollView.swift in Sources */,
 				9D2663EA1F15693400EB5B0E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,7 +276,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -301,10 +290,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 35DWKWL79J;
 				INFOPLIST_FILE = AZImagePreviewExample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.crofis.AZImagePreviewExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -314,10 +306,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 35DWKWL79J;
 				INFOPLIST_FILE = AZImagePreviewExample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.crofis.AZImagePreviewExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -343,6 +338,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CF778DA12538335400D71C25 /* XCRemoteSwiftPackageReference "." */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = ../;
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CF778DA22538335400D71C25 /* AZImagePreview */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF778DA12538335400D71C25 /* XCRemoteSwiftPackageReference "." */;
+			productName = AZImagePreview;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9D2663DE1F15693400EB5B0E /* Project object */;
 }

@@ -14,6 +14,11 @@ public typealias AZPresenterHandler = (AZImagePresenterViewController,UIImageVie
 public struct AZPresenterAction{
     public var icon: UIImage
     public var handler: AZPresenterHandler
+
+    public init(icon: UIImage, handler: @escaping AZPresenterHandler) {
+        self.icon = icon
+        self.handler = handler
+    }
 }
 
 // MARK: - AZPreviewDismissDirection
@@ -562,7 +567,7 @@ public extension UIImageView{
     
     private static let association = ObjectAssociation<AZPreviewImageViewDelegate>(policy: .OBJC_ASSOCIATION_ASSIGN)
     
-    public var delegate: AZPreviewImageViewDelegate? {
+    var delegate: AZPreviewImageViewDelegate? {
         
         get {
             return UIImageView.association[self] }
@@ -584,7 +589,7 @@ public extension UIImageView{
     }
     
     
-    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         let tap:UITouch = touches.first!
         let point = tap.location(in: self)
