@@ -29,6 +29,18 @@ public enum AZPreviewDismissDirection{
 
 open class AZImagePresenterViewController: UIViewController{
     
+    open override var shouldAutorotate: Bool {
+        return UIDevice.current.userInterfaceIdiom == .pad
+    }
+        
+    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
+            return UIInterfaceOrientationMask.all
+        } else {
+            return UIInterfaceOrientationMask.portrait
+        }
+    }
+    
     open class func embedInNavigation(_ controller: AZImagePresenterViewController)->UINavigationController{
         let navigationController = FixedNavigationController(rootViewController: controller)
         navigationController.modalPresentationStyle = .overFullScreen
@@ -280,6 +292,16 @@ open class AZImagePresenterViewController: UIViewController{
         }
     }
 
+    open override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.contentInset = .zero
+        self.imageView?.frame = self.scrollView.frame
+    }
     
     @objc internal func done(_ sender: UIBarButtonItem){
         if let imageView = imageView, !isDragging{
@@ -399,7 +421,7 @@ open class AZImagePresenterViewController: UIViewController{
         let sWidth: CGFloat
         let sHeight: CGFloat
         
-        if self.isPortrait{
+        if self.isPortrait || UIDevice.current.userInterfaceIdiom != .pad {
             sWidth = self.view.frame.width
             sHeight = sWidth/ratio
         }else{
